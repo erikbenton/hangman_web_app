@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman</title>
+</head>
+<body>
+
+	<div class="container">
+		<h1>Welcome to Hangman!</h1>
+
+		<div class="rules">
+			<h3>Rules</h3>
+			<ol>
+				<li>A random word will be chosen</li>
+				<li>You guess what letter is in the word</li>
+				<ul>
+					<li>If you guess correctly, the letter is revealed</li>
+					<li>If you guess incorrectly, another body part of the man is drawn</li>
+					<li>You get <%= max_guesses %> guesses until the man is drawn and the game is over</li>
+				</ul>
+				<li>If you win the game, Hurrah! Play another =)</li>
+				<li>If you lose the game, try again =)</li>
+			</ol>
+
+			<form method="GET" action="/playing">
+				<input type="submit">
+			</form>
+
+		</div>
+	</div>
+
+</body>
+</html>
