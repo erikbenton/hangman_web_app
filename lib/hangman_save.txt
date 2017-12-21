@@ -1,0 +1,1 @@
+{:word=>{:s=>"no", :u=>"no", :p=>"no", :o=>"no", :e=>"no", :d=>"no"}, :word_length=>6, :guesses=>{}, :number_of_guesses=>0, :max_guess_number=>10, :is_playing=>true}
