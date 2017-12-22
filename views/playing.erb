@@ -2,27 +2,35 @@
 <html>
 <head>
 	<title>Hangman</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
 	<div class="container">
-
 		<p><%=word.inspect%></p>
+		<div class="hangman-figure">
+			<p>&nbsp____</p>
+	    <p>&nbsp|&nbsp&nbsp&nbsp|</p>
+	    <p>&nbspO&nbsp&nbsp|</p>
+	    <!-- <p>&nbsp_&nbsp&nbsp|</p> -->
+	    <p>/|\&nbsp|</p>
+	    <p>&nbsp/\&nbsp|</p>
+	    <p>-----</p>
+  </div>
 		<p><%=letters_in_word%></p>
 
 		<p>You have <%= 7 - number_of_guesses %> guesses left</p>
+
+		<form class="input" method="GET" action="/playing">
+			<input type="text" name="guess" placeholder="">
+			<input type="submit" value="Guess">
+		</form>
 
 		<p class="incorrect-guesses">
 			<% incorrect_guesses.each do |letter| %>
 				<%= letter + " " %>
 			<% end %>
-			</p>
-		<form class="input" method="GET" action="/playing">
-
-			<label>Guess: <input type="text" name="guess" placeholder=""></label>
-
-			<input type="submit">
-
-		</form>
+		</p>
 
 		<% if message != "" %>
 			<p class="message"><%= message %></p>

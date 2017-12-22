@@ -90,7 +90,7 @@ def check_guess(guess)
 		if !@@word.include? guess
 			@@guesses[guess.to_s] = "no"
 			@@number_of_guesses += 1
-			if @@number_of_guesses == @max_guess_number
+			if @@number_of_guesses == MAX_GUESSES
 				@@is_playing = false
 			end
 		else
