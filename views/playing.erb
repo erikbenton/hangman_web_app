@@ -6,9 +6,27 @@
 <body>
 	<div class="container">
 
-		<p><%=word%></p>
-		<p><%=guesses%></p>
+		<p><%=word.inspect%></p>
 		<p><%=letters_in_word%></p>
+
+		<p>You have <%= 7 - number_of_guesses %> guesses left</p>
+
+		<p class="incorrect-guesses">
+			<% incorrect_guesses.each do |letter| %>
+				<%= letter + " " %>
+			<% end %>
+			</p>
+		<form class="input" method="GET" action="/playing">
+
+			<label>Guess: <input type="text" name="guess" placeholder=""></label>
+
+			<input type="submit">
+
+		</form>
+
+		<% if message != "" %>
+			<p class="message"><%= message %></p>
+		<% end %>
 		
 	</div>
 

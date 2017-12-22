@@ -29,15 +29,22 @@ get '/playing' do
 	# Shows the game
 	# Gets input for guesses
 	# Allows for save?
-	letters_in_word = get_letters_guessed
+	
 	message = ""
-	if params["guess"]
+	if params["guess"] && params["guess"] != ""
 		message = check_guess(params["guess"])
 	end
+	letters_in_word = get_letters_guessed
 	get_incorrect_guesses
 
-	erb :playing, :locals => {:word => @@word, :guesses => @@guesses, :letters_in_word => letters_in_word}
+	if @@is_playing == true
 
+		erb :playing, :locals => {:word => @@word, :guesses => @@guesses, :incorrect_guesses => @@incorrect_guesses, :number_of_guesses => @@number_of_guesses, :letters_in_word => letters_in_word, :message => message}
+
+	else
+		win_or_loss = params["win_or_loss"]
+		redirect '/gameover'
+	end
 end
 
 
@@ -55,6 +62,7 @@ def setup_game
 	@@word_length = @@word.length
 	@@guesses = {}
 	@@number_of_guesses = @@guesses.length
+	@@incorrect_guesses = []
 	@@is_playing = true
 end
 
@@ -78,8 +86,8 @@ def check_guess(guess)
 	message = ""
 	if guess.length > 1
 		message = "Please enter a single letter"
-	elsif !@guesses[guess.to_s]
-		if !@word.include? guess
+	elsif !@@guesses[guess.to_s]
+		if !@@word.include? guess
 			@@guesses[guess.to_s] = "no"
 			@@number_of_guesses += 1
 			if @@number_of_guesses == @max_guess_number
@@ -108,7 +116,7 @@ end
 
 def get_incorrect_guesses
 	@@guesses.each do |guess, val|
-		if val == "no"
+		if val == "no" && (!@@incorrect_guesses.include? guess.to_s)
 			@@incorrect_guesses.push(guess.to_s)
 		end
 	end
